@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+ "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"
+ [<!ENTITY mathml "http://www.w3.org/1998/Math/MathML">]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link href="http://www.x.org/" rel="home" />
+<link href="index.xhtml" rel="up" />
+<link rel="SHORTCUT ICON" href="../../../favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../../../xorg.css" />
+<meta name="generator" content="groff -Txhtml, see www.gnu.org"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="Content-Style" content="text/css"/>
+<style type="text/css">
+       .center { text-align: center }
+       .right  { text-align: right }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<!-- Creator     : groff version 1.20.1 -->
+<!-- CreationDate: Sun Apr 15 13:22:50 2012 -->
+<title>mkhtmlindex</title>
+
+</head>
+<body>
+
+<h1>mkhtmlindex</h1>
+
+<p><a href="#heading1">NAME</a><br/>
+<a href="#heading2">SYNOPSIS</a><br/>
+<a href="#heading3">DESCRIPTION</a><br/>
+<a href="#heading4">OPTIONS</a><br/>
+<a href="#heading5">NOTES</a><br/>
+<a href="#heading6">AUTHOR</a><br/>
+
+</p>
+<hr/>
+
+
+<h2 id="heading1">NAME
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">mkhtmlindex
+&minus; generate index files for HTML man pages</p>
+
+<h2 id="heading2">SYNOPSIS
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>mkhtmlindex</b>
+<i>htmlmandir</i></p>
+
+<h2 id="heading3">DESCRIPTION
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The
+<i>mkhtmlindex</i> program generates index files for a
+directory of HTML-formatted manual pages. It searches for
+files whose names are of the form &ldquo;name.1.html&rdquo;,
+and outputs index files &ldquo;manindex1.html&rdquo;,
+&ldquo;manindex.2.html&rdquo;, and so on, one for each
+manual volume. Empty index files will be removed. Names and
+descriptions are found by scanning the first
+<i>&lt;H2&gt;</i> section of each page.</p>
+
+<h2 id="heading4">OPTIONS
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><i>mkhtmlindex</i>
+takes only one argument: the directory to process.</p>
+
+<h2 id="heading5">NOTES
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">This utility is
+currently rather specific to X manual pages. In particular,
+the format of the index files it outputs is not
+configurable, nor is the HTML formatting it expects of
+manual pages.</p>
+
+<h2 id="heading6">AUTHOR
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The version of
+the <i>mkhtmlindex</i> included in this X.Org Foundation
+release was originally written by David Dawes wrote as a
+part of XFree86.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Colin Watson
+wrote this manual page, originally for the Debian
+Project.</p>
+<hr/>
+</body>
+</html>

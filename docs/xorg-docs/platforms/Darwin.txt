@@ -1,0 +1,22 @@
+X on Darwin and Mac OS X
+
+   X Version 11, Release 7.7
+
+   October 2009
+     __________________________________________________________
+
+   Table of Contents
+
+   Introduction
+
+Introduction
+
+   X11R7.7(TM), a freely redistributable open-source
+   implementation of the X Window System from the X.Org
+   Foundation, has been ported to Darwin and Mac OS X.
+
+   Most of the current work on X for Darwin and Mac OS X is
+   centered around the XQuartz Project at MacOSforge. If you are
+   interested in up-to-date status, want to report a bug, or are
+   interested in working on X11 for Darwin, stop by the project
+   website at https://www.xquartz.org/

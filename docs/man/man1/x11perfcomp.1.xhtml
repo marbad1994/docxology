@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+ "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"
+ [<!ENTITY mathml "http://www.w3.org/1998/Math/MathML">]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link href="http://www.x.org/" rel="home" />
+<link href="index.xhtml" rel="up" />
+<link rel="SHORTCUT ICON" href="../../../favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../../../xorg.css" />
+<meta name="generator" content="groff -Txhtml, see www.gnu.org"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="Content-Style" content="text/css"/>
+<style type="text/css">
+       .center { text-align: center }
+       .right  { text-align: right }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<!-- Creator     : groff version 1.20.1 -->
+<!-- CreationDate: Sun Apr 15 13:22:51 2012 -->
+<title>X11PERFCOMP</title>
+
+</head>
+<body>
+
+<h1>X11PERFCOMP</h1>
+
+<p><a href="#heading1">NAME</a><br/>
+<a href="#heading2">SYNTAX</a><br/>
+<a href="#heading3">DESCRIPTION</a><br/>
+<a href="#heading4">OPTIONS</a><br/>
+<a href="#heading5">X DEFAULTS</a><br/>
+<a href="#heading6">SEE ALSO</a><br/>
+<a href="#heading7">AUTHORS</a><br/>
+
+</p>
+<hr/>
+
+
+<h2 id="heading1">NAME
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">x11perfcomp
+&minus; X11 server performance comparison program</p>
+
+<h2 id="heading2">SYNTAX
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>x11perfcomp</b>
+[ &minus;r | &minus;ro ] [ &minus;l label_file ] files</p>
+
+<h2 id="heading3">DESCRIPTION
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The
+<i>x11perfcomp</i> program merges the output of several
+<i><a href="../man1/x11perf.1.xhtml"><em>x11perf</em>(1)</a></i> runs into a nice tabular format. It takes
+the results in each file, fills in any missing test results
+if necessary, and for each test shows the objects/second
+rate of each server. If invoked with the -r or -ro options,
+it shows the relative performance of each server to the
+first server.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Normally,
+<i>x11perfcomp</i> uses the first file specified to
+determine which specific tests it should report on. Some
+(non-DEC :) servers may fail to perform all tests. In this
+case, <i>x11perfcomp</i> automatically substitutes in a rate
+of 0.0 objects/second. Since the first file determines which
+tests to report on, this file must contain a superset of the
+tests reported in the other files, else <i>x11perfcomp</i>
+will fail.</p>
+
+<p style="margin-left:11%; margin-top: 1em">You can provide
+an explicit list of tests to report on by using the -l
+switch to specify a file of labels. You can create a label
+file by using the -label option in <i>x11perf.</i></p>
+
+<h2 id="heading4">OPTIONS
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><i>x11perfcomp</i>
+accepts the options listed below:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="20%"></col>
+<col width="4%" class="center"></col>
+<col width="65%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>&minus;r</b></p></td>
+<td></td>
+<td>
+
+
+<p>Specifies that the output should also include relative
+server performance.</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>&minus;ro</b></p></td>
+<td></td>
+<td>
+
+
+<p>Specifies that the output should include only relative
+server performance.</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>&minus;l label_file</b></p></td>
+<td></td>
+<td>
+
+
+<p>Specifies a label file to use.</p></td></tr>
+</table>
+
+<h2 id="heading5">X DEFAULTS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">There are no X
+defaults used by this program.</p>
+
+<h2 id="heading6">SEE ALSO
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><a href="../man7/X.7.xhtml"><em>X</em>(7)</a>,
+<a href="../man1/x11perf.1.xhtml"><em>x11perf</em>(1)</a></p>
+
+<h2 id="heading7">AUTHORS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Mark Moraes
+wrote the original scripts to compare servers. <br/>
+Joel McCormack just munged them together a bit.</p>
+<hr/>
+</body>
+</html>

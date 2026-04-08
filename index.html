@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X.Org Documentation — X11R7.7</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://www.x.org/favicon.ico">
+</head>
+<body>
+  <!-- Search overlay (Ctrl+K) -->
+  <div id="search-overlay" class="search-overlay hidden" role="dialog" aria-label="Search documentation">
+    <div class="search-modal">
+      <div class="search-input-wrap">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="search-input" type="text" placeholder="Search all 1500+ docs..." autocomplete="off" spellcheck="false">
+        <kbd class="search-kbd">Esc</kbd>
+      </div>
+      <div id="search-results" class="search-results"></div>
+      <div class="search-footer" id="search-footer">
+        <span id="search-status">Loading search index...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <div>
+          <h1 class="logo-title">X.Org Docs</h1>
+          <span class="logo-version">X11R7.7</span>
+        </div>
+      </div>
+      <button id="theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">
+        <svg id="theme-icon-dark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="theme-icon-light" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+
+    <button id="search-trigger" class="search-trigger" aria-label="Search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>Search all docs...</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+
+    <!-- Pinned documents -->
+    <div id="pinned-section" class="pinned-section empty">
+      <div class="pinned-header">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16 2l-4 4-6-2-2 2 5 5-5 7 2 2 7-5 5 5 2-2-2-6 4-4z"/></svg>
+        <span>Pinned</span>
+      </div>
+      <div id="pinned-list" class="pinned-list"></div>
+    </div>
+
+    <nav id="sidebar-nav" class="sidebar-nav" aria-label="Documentation sections"></nav>
+
+    <div class="sidebar-footer">
+      <a href="https://www.x.org/" target="_blank" rel="noopener" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        x.org
+      </a>
+      <a href="https://www.x.org/releases/current/doc/" target="_blank" rel="noopener" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Original docs
+      </a>
+    </div>
+  </aside>
+
+  <!-- Mobile header -->
+  <header class="mobile-header">
+    <button id="mobile-menu-btn" class="icon-btn" aria-label="Open menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <span class="mobile-title">X.Org Docs</span>
+    <button id="mobile-search-btn" class="icon-btn" aria-label="Search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+  </header>
+
+  <!-- Main content -->
+  <main id="main-content" class="main-content">
+    <!-- Welcome / landing view -->
+    <div id="welcome-view" class="welcome-view">
+      <div class="welcome-hero">
+        <h2>X Window System Documentation</h2>
+        <p class="welcome-subtitle">X11 Release 7.7 — 1500+ documents, fully searchable, offline-ready</p>
+        <p class="welcome-hint">Browse sections in the sidebar or press <kbd>Ctrl</kbd> + <kbd>K</kbd> to search full text</p>
+      </div>
+
+      <div id="section-cards" class="section-cards"></div>
+
+      <div class="welcome-stats" id="welcome-stats"></div>
+    </div>
+
+    <!-- Document viewer (local content) -->
+    <div id="doc-view" class="doc-view hidden">
+      <div class="doc-toolbar">
+        <button id="back-btn" class="back-btn" aria-label="Back to home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back
+        </button>
+        <div class="doc-breadcrumb" id="doc-breadcrumb"></div>
+        <div class="doc-actions">
+          <div class="doc-formats" id="doc-formats"></div>
+          <button id="doc-pin-btn" class="icon-btn pin-btn" title="Pin this page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 2l-4 4-6-2-2 2 5 5-5 7 2 2 7-5 5 5 2-2-2-6 4-4z"/></svg>
+          </button>
+          <button id="doc-find-btn" class="icon-btn" title="Find in document (Ctrl+F)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- In-page find bar -->
+      <div id="doc-find-bar" class="doc-find-bar hidden">
+        <input id="doc-find-input" type="text" placeholder="Find in document..." autocomplete="off" spellcheck="false">
+        <span id="doc-find-count" class="doc-find-count"></span>
+        <button id="doc-find-prev" class="icon-btn small" title="Previous">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+        <button id="doc-find-next" class="icon-btn small" title="Next">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <button id="doc-find-close" class="icon-btn small" title="Close">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="doc-content" class="doc-content"></div>
+    </div>
+
+    <!-- Section list view -->
+    <div id="section-view" class="section-view hidden">
+      <div class="section-header">
+        <button id="section-back-btn" class="back-btn" aria-label="Back to home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back
+        </button>
+        <div>
+          <h2 id="section-title" class="section-title"></h2>
+          <p id="section-desc" class="section-desc"></p>
+        </div>
+      </div>
+      <div class="section-filter-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="section-filter" type="text" placeholder="Filter in this section..." autocomplete="off" spellcheck="false">
+      </div>
+      <div id="section-items" class="section-items"></div>
+    </div>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

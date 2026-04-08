@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+ "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"
+ [<!ENTITY mathml "http://www.w3.org/1998/Math/MathML">]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link href="http://www.x.org/" rel="home" />
+<link href="index.xhtml" rel="up" />
+<link rel="SHORTCUT ICON" href="../../../favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../../../xorg.css" />
+<meta name="generator" content="groff -Txhtml, see www.gnu.org"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="Content-Style" content="text/css"/>
+<style type="text/css">
+       .center { text-align: center }
+       .right  { text-align: right }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<!-- Creator     : groff version 1.20.1 -->
+<!-- CreationDate: Sun Apr 15 13:45:41 2012 -->
+<title>TRIDENT</title>
+
+</head>
+<body>
+
+<h1>TRIDENT</h1>
+
+<p><a href="#heading1">NAME</a><br/>
+<a href="#heading2">SYNOPSIS</a><br/>
+<a href="#heading3">DESCRIPTION</a><br/>
+<a href="#heading4">SUPPORTED HARDWARE</a><br/>
+<a href="#heading5">CONFIGURATION DETAILS</a><br/>
+<a href="#heading6">SEE ALSO</a><br/>
+<a href="#heading7">AUTHOR</a><br/>
+
+</p>
+<hr/>
+
+
+<h2 id="heading1">NAME
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">trident &minus;
+Trident video driver</p>
+
+<h2 id="heading2">SYNOPSIS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Section
+&quot;Device&quot; <br/>
+Identifier &quot;</b><i>devname</i><b>&quot; <br/>
+Driver &quot;trident&quot; &nbsp;&nbsp;</b> <br/>
+... <b><br/>
+EndSection</b></p>
+
+<h2 id="heading3">DESCRIPTION
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>trident</b>
+is an Xorg driver for Trident video cards. The driver is
+accelerated, and provides support for the following
+framebuffer depths: 1, 4, 8, 15, 16, and 24. Multi-head
+configurations are supported. The XvImage extension is
+supported on TGUI96xx and greater cards.</p>
+
+<h2 id="heading4">SUPPORTED HARDWARE
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The
+<b>trident</b> driver supports PCI,AGP and ISA video cards
+based on the following Trident chips:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="14%"></col>
+<col width="4%" class="center"></col>
+<col width="71%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>Blade</b></p></td>
+<td></td>
+<td>
+
+
+<p>Blade3D, CyberBlade series i1, i7 (DSTN), i1, i1 (DSTN),
+Ai1, Ai1 (DSTN), CyberBlade/e4, CyberBladeXP,
+CyberBladeAi1/XP, BladeXP</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>Image</b></p></td>
+<td></td>
+<td>
+
+
+<p>3DImage975, 3DImage985, Cyber9520, Cyber9525, Cyber9397,
+Cyber9397DVD</p> </td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>ProVidia</b></p></td>
+<td></td>
+<td>
+
+
+<p>9682, 9685, Cyber9382, Cyber9385, Cyber9388</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>TGUI</b></p></td>
+<td></td>
+<td>
+
+
+<p>9440AGi, 9660, 9680</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>ISA/VLBus</b></p></td>
+<td></td>
+<td>
+
+
+<p>8900C, 8900D, 9000, 9200CXr, Cyber9320, 9400CXi, 9440AGi
+These cards have been ported but need further testing and
+may not work.</p></td></tr>
+</table>
+
+<h2 id="heading5">CONFIGURATION DETAILS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Please refer to
+<a href="../man5/xorg.conf.5.xhtml"><em>xorg.conf</em>(5)</a> for general configuration details. This section
+only covers configuration details specific to this
+driver.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The following
+driver <b>Options</b> are supported: <b><br/>
+Option &quot;SWCursor&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Enable or disable the SW
+cursor. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;NoAccel&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Disable or enable acceleration.
+Default: acceleration is enabled.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;PciRetry&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Enable or disable PCI retries.
+Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;CyberShadow&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">For Cyber chipsets only, turn
+off shadow registers. If you only see a partial display -
+this may be the option for you. Default: on.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;CyberStretch&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">For Cyber chipsets only, turn
+on stretching. When the resolution is lower than the
+LCD&rsquo;s screen, this option will stretch the graphics
+mode to fill the entire LCD. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;ShadowFB&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Enable or disable use of the
+shadow framebuffer layer. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;VideoKey&quot;
+&quot;</b><i>integer</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">This sets the default pixel
+value for the YUV video overlay key. Default: undefined.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;TVChipset&quot;
+&quot;</b><i>string</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">This sets the TV chipset.
+Options are CH7005 or VT1621. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;TVSignal&quot;
+&quot;</b><i>integer</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">This sets the TV signalling.
+Options are 0 for NTSC or 1 for PAL. Default: undefined.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;NoPciBurst&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Turn off PCI burst mode, PCI
+Bursting is on by default. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;XvHsync&quot;
+&quot;</b><i>integer</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Override the default
+Horizontal-sync value for the Xv extension. This is used to
+center the Xv image on the screen. By default the values are
+assigned based on the video card. Default: 0.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;XvVsync&quot;
+&quot;</b><i>integer</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Override the default
+Vertical-sync value for the Xv extension. This is used to
+center the Xv image on the screen. By default the values are
+assigned based on the video card. Default: 0.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;XvBskew&quot;
+&quot;</b><i>integer</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Override the default Bottom
+skew value for the Xv extension. This is used to extend the
+Xv image on the screen at the bottom. By default the values
+are assigned based on the video card. Default: 0.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;XvRskew&quot;
+&quot;</b><i>integer</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Override the default Right skew
+value for the Xv extension. This is used to extend the Xv
+image on the screen at the right. By default the values are
+assigned based on the video card. Default: 0.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;Display&quot;
+&quot;</b><i>string</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Override the display. Possible
+values are &quot;CRT&quot;, &quot;LCD&quot; and
+&quot;Dual&quot;. Please note that this option is only
+experimentally. Default: Use display active when X
+started.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;Display1400&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Inform driver to expect
+1400x1050 display instead of a 1280x1024. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;GammaBrightness&quot;
+&quot;</b><i>string</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Set display gamma value and
+brightness. &quot;<i>string</i>&quot; is &quot;<i>gamma</i>,
+<i>brightness</i>&quot;, where <i>gamma</i> is a floating
+point value greater than 0 and less or equal to 10.
+<i>brightness</i> is an integer value greater or equal to 0
+and less than 128. Default: gamma and brightness control is
+turned off. Note: This is not supported on all chipsets.
+<b>Option &quot;AccelMethod&quot;
+&quot;</b><i>string</i><b>&quot;</b> Choose acceleration
+architecture, either &quot;XAA&quot; or &quot;EXA&quot;. XAA
+is the old (but stable) XFree86 based acceleration
+architecture. EXA is a newer and simpler acceleration
+architecture designed to better accelerate the X Render
+extension. Default: &quot;XAA&quot;.</p>
+
+<h2 id="heading6">SEE ALSO
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><a href="../man1/Xorg.1.xhtml"><em>Xorg</em>(1)</a>,
+<a href="../man5/xorg.conf.5.xhtml"><em>xorg.conf</em>(5)</a>, <a href="../man1/Xserver.1.xhtml"><em>Xserver</em>(1)</a>, <a href="../man7/X.7.xhtml"><em>X</em>(7)</a></p>
+
+<h2 id="heading7">AUTHOR
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Author: Alan
+Hourihane, EXA for Blade chips by Jesse Barnes</p>
+<hr/>
+</body>
+</html>

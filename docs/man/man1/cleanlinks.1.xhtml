@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+ "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"
+ [<!ENTITY mathml "http://www.w3.org/1998/Math/MathML">]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link href="http://www.x.org/" rel="home" />
+<link href="index.xhtml" rel="up" />
+<link rel="SHORTCUT ICON" href="../../../favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../../../xorg.css" />
+<meta name="generator" content="groff -Txhtml, see www.gnu.org"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="Content-Style" content="text/css"/>
+<style type="text/css">
+       .center { text-align: center }
+       .right  { text-align: right }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<!-- Creator     : groff version 1.20.1 -->
+<!-- CreationDate: Sun Apr 15 13:23:06 2012 -->
+<title>cleanlinks</title>
+
+</head>
+<body>
+
+<h1>cleanlinks</h1>
+
+<p><a href="#heading1">NAME</a><br/>
+<a href="#heading2">SYNOPSIS</a><br/>
+<a href="#heading3">DESCRIPTION</a><br/>
+<a href="#heading4">DIAGNOSTICS</a><br/>
+<a href="#heading5">SEE ALSO</a><br/>
+<a href="#heading6">AUTHOR</a><br/>
+
+</p>
+<hr/>
+
+
+<h2 id="heading1">NAME
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">cleanlinks
+&minus; remove dangling symbolic links and empty
+directories</p>
+
+<h2 id="heading2">SYNOPSIS
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>cleanlinks</b></p>
+
+<h2 id="heading3">DESCRIPTION
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The
+<i>cleanlinks</i> program searches the directory tree
+descended from the current directory for symbolic links
+whose targets do not exist, and removes them. It then
+removes all empty directories in that directory tree.</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><i>cleanlinks</i>
+is useful for cleaning up a shadow link tree created with
+<a href="../man1/lndir.1.xhtml"><em>lndir</em>(1)</a> after files have been removed from the real
+directory.</p>
+
+<h2 id="heading4">DIAGNOSTICS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">A message will
+be printed upon encountering each dangling symlink and empty
+directory.</p>
+
+<h2 id="heading5">SEE ALSO
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><a href="../man1/lndir.1.xhtml"><em>lndir</em>(1)</a>.</p>
+
+<h2 id="heading6">AUTHOR
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The version of
+the <i>cleanlinks</i> included in this X.Org Foundation
+release was originally written by David Dawes wrote as a
+part of XFree86.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Colin Watson
+wrote this manual page, originally for the Debian
+Project.</p>
+<hr/>
+</body>
+</html>

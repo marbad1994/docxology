@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+ "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"
+ [<!ENTITY mathml "http://www.w3.org/1998/Math/MathML">]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link href="http://www.x.org/" rel="home" />
+<link href="index.xhtml" rel="up" />
+<link rel="SHORTCUT ICON" href="../../../favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../../../xorg.css" />
+<meta name="generator" content="groff -Txhtml, see www.gnu.org"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="Content-Style" content="text/css"/>
+<style type="text/css">
+       .center { text-align: center }
+       .right  { text-align: right }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<!-- Creator     : groff version 1.20.1 -->
+<!-- CreationDate: Sun Apr 15 13:45:35 2012 -->
+<title>mga</title>
+
+</head>
+<body>
+
+<h1>mga</h1>
+
+<p><a href="#heading1">NAME</a><br/>
+<a href="#heading2">SYNOPSIS</a><br/>
+<a href="#heading3">DESCRIPTION</a><br/>
+<a href="#heading4">SUPPORTED HARDWARE</a><br/>
+<a href="#heading5">CONFIGURATION DETAILS</a><br/>
+<a href="#heading6">SEE ALSO</a><br/>
+<a href="#heading7">AUTHORS</a><br/>
+
+</p>
+<hr/>
+
+
+<h2 id="heading1">NAME
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">mga &minus;
+Matrox video driver</p>
+
+<h2 id="heading2">SYNOPSIS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Section
+&quot;Device&quot; <br/>
+Identifier &quot;</b><i>devname</i><b>&quot; <br/>
+Driver &quot;mga&quot; &nbsp;&nbsp;</b> <br/>
+... <b><br/>
+EndSection</b></p>
+
+<h2 id="heading3">DESCRIPTION
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>mga</b> is
+an Xorg driver for Matrox video cards. The driver is fully
+accelerated, and provides support for the following
+framebuffer depths: 8, 15, 16, 24, and an 8+24 overlay mode.
+All visual types are supported for depth 8, and both
+TrueColor and DirectColor visuals are supported for the
+other depths except 8+24 mode which supports PseudoColor,
+GrayScale and TrueColor. Multi&minus;card configurations are
+supported. XVideo is supported on G200 and newer systems,
+with either <b>TexturedVideo</b> or video overlay. The
+second head of dual&minus;head cards is supported for the
+G450 and G550. Support for the second head on G400 cards
+requires a binary&minus;only &quot;mga_hal&quot; module that
+is available from Matrox &lt;http://www.matrox.com&gt;, and
+may be on the CD supplied with the card. That module also
+provides various other enhancements, and may be necessary to
+use the DVI (digital) output on the G550 (and other
+cards).</p>
+
+<h2 id="heading4">SUPPORTED HARDWARE
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The <b>mga</b>
+driver supports PCI and AGP video cards based on the
+following Matrox chips. They are listed in approximate
+chronological order of production (with the most recent
+chipsets listed last), so consult this list when you are
+unsure whether your card is meant when references are made
+to &lsquo;G200 and later&rsquo; chips, for example. <b><br/>
+MGA2064W <br/>
+MGA1064SG</b></p>
+
+<p style="margin-left:22%;">Mystique</p>
+
+<p style="margin-left:11%;"><b>MGA2164W</b></p>
+
+<p style="margin-left:22%;">Millennium II</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="6%"></col>
+<col width="5%" class="center"></col>
+<col width="78%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>G100</b></p></td>
+<td></td>
+<td>
+
+
+<p>Productiva G100</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>G200</b></p></td>
+<td></td>
+<td>
+
+
+<p>Millennium G200 and Mystique G200</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>G400</b></p></td>
+<td></td>
+<td>
+
+
+<p>Millennium G400, Millennium G400 MAX, Millennium G450,
+and Marvel G450 eTV</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>G550</b></p></td>
+<td></td>
+<td>
+
+
+<p>Millennium G550 and Millennium G550 Dual DVI</p></td></tr>
+</table>
+
+<h2 id="heading5">CONFIGURATION DETAILS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Please refer to
+<a href="../man5/xorg.conf.5.xhtml"><em>xorg.conf</em>(5)</a> for general configuration details. This section
+only covers configuration details specific to this
+driver.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The driver
+auto&minus;detects the chipset type, but the following
+<b>ChipSet</b> names may optionally be specified in the
+config file <b>&quot;Device&quot;</b> section, and will
+override the auto&minus;detection:</p>
+
+
+<p style="margin-left:17%; margin-top: 1em">&quot;mga2064w&quot;,
+&quot;mga1064sg&quot;, &quot;mga2164w&quot;, &quot;mga2164w
+agp&quot;, &quot;mgag100&quot;, &quot;mgag200&quot;,
+&quot;mgag200 pci&quot;, &quot;mgag400&quot;,
+&quot;mgag550&quot;.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The G450 is
+Chipset &quot;mgag400&quot; with ChipRev 0x80.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The driver will
+auto&minus;detect the amount of video memory present for all
+chips except the Millennium II. In the Millennium II case it
+defaults to 4096&nbsp;kBytes. When using a Millennium II,
+the actual amount of video memory should be specified with a
+<b>VideoRam</b> entry in the config file
+<b>&quot;Device&quot;</b> section.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The following
+driver <b>Options</b> are supported: <b><br/>
+Option &quot;ColorKey&quot;
+&quot;</b><i>integer</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Set the colormap index used for
+the transparency key for the depth 8 plane when operating in
+8+24 overlay mode. The value must be in the range
+2&minus;255. Default: 255.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;HWCursor&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Enable or disable the HW
+cursor. Default: on.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;MGASDRAM&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Specify whether G100, G200 or
+G400 cards have SDRAM. The driver attempts to
+auto&minus;detect this based on the card&rsquo;s PCI
+subsystem ID. This option may be used to override that
+auto&minus;detection. The <b>mga</b> driver is not able to
+auto&minus;detect the presence of of SDRAM on secondary
+heads in multihead configurations so this option will often
+need to be specified in multihead configurations. Default:
+auto&minus;detected.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;NoAccel&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Disable or enable acceleration.
+Default: acceleration is enabled.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;AccelMethod&quot;
+&quot;</b><i>string</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Chooses between available
+acceleration architectures. Valid options are <b>XAA</b> and
+<b>EXA.</b> XAA is the traditional acceleration architecture
+and support for it is very stable. EXA is a newer
+acceleration architecture with better performance for the
+Render and Composite extensions, but the rendering code for
+it is newer and possibly unstable. The default is
+<b>XAA.</b></p>
+
+<p style="margin-left:11%;"><b>Option &quot;NoHal&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Disable or enable loading the
+&quot;mga_hal&quot; module. Default: the module is loaded
+when available and when using hardware that it supports.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;OverclockMem&quot;</b></p>
+
+<p style="margin-left:22%;">Set clocks to values used by
+some commercial X Servers (G100, G200 and G400 only).
+Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;PciRetry&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Enable or disable PCI retries.
+Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;Rotate&quot;
+&quot;CW&quot; <br/>
+Option &quot;Rotate&quot; &quot;CCW&quot;</b></p>
+
+<p style="margin-left:22%;">Rotate the display clockwise or
+counterclockwise. This mode is unaccelerated. Default: no
+rotation.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;ShadowFB&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Enable or disable use of the
+shadow framebuffer layer. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;SyncOnGreen&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Enable or disable combining the
+sync signals with the green signal. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;UseFBDev&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">Enable or disable use of on
+OS&minus;specific fb interface (and is not supported on all
+OSs). See <a href="../man4/fbdevhw.4.xhtml"><em>fbdevhw</em>(4)</a> for further information. Default:
+off.</p>
+
+<p style="margin-left:11%;"><b>Option &quot;VideoKey&quot;
+&quot;</b><i>integer</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">This sets the default pixel
+value for the YUV video overlay key. Default: undefined.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;TexturedVideo&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">This has XvImage support use
+the texture engine rather than the video overlay. This
+option is only supported by G200 and later chips, and only
+at 16 and 32 bits per pixel. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;OldDmaInit&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">This forces the driver to use
+the old DMA initialization path for DRI. Use this option
+only to support a older version of the DRI driver with a
+newer DRM (version 3.2 or later). This option also disables
+the use of direct rendering on PCI cards. Default: off.</p>
+
+<p style="margin-left:11%;"><b>Option
+&quot;ForcePciDma&quot;
+&quot;</b><i>boolean</i><b>&quot;</b></p>
+
+<p style="margin-left:22%;">This forces the use of PCI DMA
+even if AGP DMA could be used. This option is primarily
+intended for testing purposes, but it could also be used on
+systems with a buggy or poorly function AGP implementation.
+Default: off.</p>
+
+<h2 id="heading6">SEE ALSO
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><a href="../man1/Xorg.1.xhtml"><em>Xorg</em>(1)</a>,
+<a href="../man5/xorg.conf.5.xhtml"><em>xorg.conf</em>(5)</a>, <a href="../man1/Xserver.1.xhtml"><em>Xserver</em>(1)</a>, <a href="../man7/X.7.xhtml"><em>X</em>(7)</a></p>
+
+<h2 id="heading7">AUTHORS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Authors
+include: Radoslaw Kapitan, Mark Vojkovich, and also David
+Dawes, Guy Desbief, Dirk Hohndel, Doug Merritt, Andrew E.
+Mileski, Andrew van der Stock, Leonard N. Zubkoff, Andrew C.
+Aitchison.</p>
+<hr/>
+</body>
+</html>

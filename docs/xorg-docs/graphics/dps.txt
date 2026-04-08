@@ -1,0 +1,46 @@
+X and DPS
+
+Juliusz Chroboczek
+
+   <jch@freedesktop.org>
+
+   27 February 2001, updated 30 October 2006
+     __________________________________________________________
+
+   Table of Contents
+
+   Notice of Obsolescence and Removal from X.Org Releases
+
+   Updated by Jim Gettys and Juliusz Chroboczek.
+
+Notice of Obsolescence and Removal from X.Org Releases
+
+   DPS is now obsolete.
+
+   At the time when I started this project, there was no decent
+   rendering interface for X11 other than DPS.
+
+   Since then, there has been a large amount of work on a simple
+   and clean X server extension, Xrender, which provides the basis
+   for just such an interface.
+
+   Rendering libraries that are being built above Xrender include
+   Xft, a font rendering library built on FreeType; Cairo, a
+   geometry rendering library that provides PostScript-like
+   rendering primitives but with from-the-ground support for
+   Porter-Duff compositing (transparency); Pango, a high-level
+   typesetting library.
+
+   If your application uses DPS, please consider porting it to the
+   above libraries. See the DPS extension site for more details
+
+   The client-side DPS software was included and built by default
+   (except as noted below) in the X.Org X11R6.8 release series.
+   The client-side software was included, but not built unless
+   specifically configured by the builder, in the X.Org X11R6.9
+   release series. The client-side DPS software is no longer
+   included in X11R7.0 or later releases.
+
+   The server-side software is not included in any X.Org release
+   for licensing reasons; the code is still available from the DPS
+   extension site; it is not known whether it still compiles.

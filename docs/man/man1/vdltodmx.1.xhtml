@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+ "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"
+ [<!ENTITY mathml "http://www.w3.org/1998/Math/MathML">]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link href="http://www.x.org/" rel="home" />
+<link href="index.xhtml" rel="up" />
+<link rel="SHORTCUT ICON" href="../../../favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../../../xorg.css" />
+<meta name="generator" content="groff -Txhtml, see www.gnu.org"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="Content-Style" content="text/css"/>
+<style type="text/css">
+       .center { text-align: center }
+       .right  { text-align: right }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<!-- Creator     : groff version 1.20.1 -->
+<!-- CreationDate: Sun Apr 15 13:22:55 2012 -->
+<title>vdltodmx</title>
+
+</head>
+<body>
+
+<h1>vdltodmx</h1>
+
+<p><a href="#heading1">NAME</a><br/>
+<a href="#heading2">SYNOPSIS</a><br/>
+<a href="#heading3">DESCRIPTION</a><br/>
+<a href="#heading4">EXAMPLE</a><br/>
+<a href="#heading5">BUGS</a><br/>
+<a href="#heading6">SEE ALSO</a><br/>
+
+</p>
+<hr/>
+
+
+<h2 id="heading1">NAME
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">vdltodmx - dmx
+configuration file parser and printer</p>
+
+<h2 id="heading2">SYNOPSIS
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>vdltodmx</b>
+<i>infile outfile</i></p>
+
+<h2 id="heading3">DESCRIPTION
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><i>vdltodmx</i>
+reads the input file, which should be in VDL configuration
+file format. After a successful parse, a file in Xdmx
+configuration file format is written to the output file.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The VDL file
+format is used with <i>xmovie</i>, which is available from
+http://www.llnl.gov/icc/lc/img/xmovie/xmovie.html</p>
+
+<h2 id="heading4">EXAMPLE
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Given the
+following VDL-format file:</p>
+
+<p style="margin-left:22%;">0 <br/>
+2 <br/>
+# <br/>
+# <br/>
+2560 2048 Left two-thirds [restrict=*:2] <br/>
+2 <br/>
+:2.1 1280 2048 0 0 0 0 <br/>
+:2.2 1280 2048 1280 0 0 0 <br/>
+4 <br/>
+1280 1024 0 0 <br/>
+1280 1024 0 1024 <br/>
+1280 1024 1280 0 <br/>
+1280 1024 1280 1024 <br/>
+# <br/>
+2560 2048 Right two-thirds [restrict=*:2] <br/>
+2 <br/>
+:2.2 1280 2048 0 0 0 0 <br/>
+:2.3 1280 2048 1280 0 0 0 <br/>
+4 <br/>
+1280 1024 1280 0 <br/>
+1280 1024 1280 1024 <br/>
+1280 1024 2560 0 <br/>
+1280 1024 2560 1024</p>
+
+<p style="margin-left:11%;">the following DMX-format file
+will be produced:</p>
+
+<p style="margin-left:22%;"># <br/>
+# <br/>
+virtual &quot;Left two-thirds&quot; 2560x2048 { <br/>
+display :2.1 1280x2048; <br/>
+display :2.2 1280x2048 @1280x0; <br/>
+} <br/>
+# <br/>
+virtual &quot;Right two-thirds&quot; 2560x2048 { <br/>
+display :2.2 1280x2048; <br/>
+display :2.3 1280x2048 @1280x0; <br/>
+}</p>
+
+<h2 id="heading5">BUGS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">If the VDL file
+is not in the expected format, the program will probably
+dump core.</p>
+
+<h2 id="heading6">SEE ALSO
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><a href="../man1/Xdmx.1.xhtml"><em>Xdmx</em>(1)</a>,
+<a href="../man1/xdmxconfig.1.xhtml"><em>xdmxconfig</em>(1)</a>, <a href="../man3/vdl.3.xhtml"><em>vdl</em>(3)</a>, <a href="../man1/xmovie.1.xhtml"><em>xmovie</em>(1)</a></p>
+<hr/>
+</body>
+</html>

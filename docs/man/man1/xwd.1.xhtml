@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+ "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"
+ [<!ENTITY mathml "http://www.w3.org/1998/Math/MathML">]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link href="http://www.x.org/" rel="home" />
+<link href="index.xhtml" rel="up" />
+<link rel="SHORTCUT ICON" href="../../../favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../../../xorg.css" />
+<meta name="generator" content="groff -Txhtml, see www.gnu.org"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="Content-Style" content="text/css"/>
+<style type="text/css">
+       .center { text-align: center }
+       .right  { text-align: right }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<!-- Creator     : groff version 1.20.1 -->
+<!-- CreationDate: Sun Apr 15 13:22:55 2012 -->
+<title>XWD</title>
+
+</head>
+<body>
+
+<h1>XWD</h1>
+
+<p><a href="#heading1">NAME</a><br/>
+<a href="#heading2">SYNOPSIS</a><br/>
+<a href="#heading3">DESCRIPTION</a><br/>
+<a href="#heading4">OPTIONS</a><br/>
+<a href="#heading5">ENVIRONMENT</a><br/>
+<a href="#heading6">FILES</a><br/>
+<a href="#heading7">SEE ALSO</a><br/>
+<a href="#heading8">AUTHORS</a><br/>
+
+</p>
+<hr/>
+
+
+<h2 id="heading1">NAME
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">xwd - dump an
+image of an X window</p>
+
+<h2 id="heading2">SYNOPSIS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>xwd</b>
+[-debug] [-help] [-nobdrs] [-out <i>file</i>] [-xy] [-frame]
+[-add <i>value</i>] [-root | -id <i>id</i> | -name
+<i>name</i> ] [-icmap] [-screen] [-silent] [-display
+<i>display</i>]</p>
+
+<h2 id="heading3">DESCRIPTION
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><i>Xwd</i> is
+an X Window System window dumping utility. <i>Xwd</i> allows
+X users to store window images in a specially formatted dump
+file. This file can then be read by various other X
+utilities for redisplay, printing, editing, formatting,
+archiving, image processing, etc. The target window is
+selected by clicking the pointer in the desired window. The
+keyboard bell is rung once at the beginning of the dump and
+twice when the dump is completed.</p>
+
+<h2 id="heading4">OPTIONS
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>-display</b>
+<i>display</i></p>
+
+<p style="margin-left:23%;">This argument allows you to
+specify the server to connect to; see <i><a href="../man7/X.7.xhtml"><em>X</em>(7)</a></i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="11%"></col>
+<col width="1%" class="center"></col>
+<col width="77%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-help</b></p></td>
+<td></td>
+<td>
+
+
+<p>Print out the &lsquo;Usage:&rsquo; command syntax
+summary.</p> </td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-nobdrs</b></p></td>
+<td></td>
+<td>
+
+
+<p>This argument specifies that the window dump should not
+include the pixels that compose the X window border. This is
+useful in situations where you may wish to include the
+window contents in a document as an illustration.</p></td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>-out</b> <i>file</i></p>
+
+<p style="margin-left:23%;">This argument allows the user
+to explicitly specify the output file on the command line.
+The default is to output to standard out.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="4%"></col>
+<col width="8%" class="center"></col>
+<col width="77%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-xy</b></p></td>
+<td></td>
+<td>
+
+
+<p>This option applies to color displays only. It selects
+&lsquo;XY&rsquo; format dumping instead of the default
+&lsquo;Z&rsquo; format.</p></td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>-add</b> <i>value</i></p>
+
+<p style="margin-left:23%;">This option specifies an signed
+value to be added to every pixel.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="9%"></col>
+<col width="3%" class="center"></col>
+<col width="77%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-frame</b></p></td>
+<td></td>
+<td>
+
+
+<p>This option indicates that the window manager frame
+should be included when manually selecting a window.</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-root</b></p></td>
+<td></td>
+<td>
+
+
+<p>This option indicates that the root window should be
+selected for the window dump, without requiring the user to
+select a window with the pointer.</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-id</b> <i>id</i></p></td>
+<td></td>
+<td>
+
+
+<p>This option indicates that the window with the specified
+resource id should be selected for the window dump, without
+requiring the user to select a window with the pointer.</p></td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>-name</b> <i>name</i></p>
+
+<p style="margin-left:23%;">This option indicates that the
+window with the specified WM_NAME property should be
+selected for the window dump, without requiring the user to
+select a window with the pointer.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="11%"></col>
+<col width="1%" class="center"></col>
+<col width="77%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-icmap</b></p></td>
+<td></td>
+<td>
+
+
+<p>Normally the colormap of the chosen window is used to
+obtain RGB values. This option forces the first installed
+colormap of the screen to be used instead.</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-screen</b></p></td>
+<td></td>
+<td>
+
+
+<p>This option indicates that the GetImage request used to
+obtain the image should be done on the root window, rather
+than directly on the specified window. In this way, you can
+obtain pieces of other windows that overlap the specified
+window, and more importantly, you can capture menus or other
+popups that are independent windows but appear over the
+specified window.</p></td></tr>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-silent</b></p></td>
+<td></td>
+<td>
+
+
+<p>Operate silently, i.e. don&rsquo;t ring any bells before
+and after dumping the window.</p></td></tr>
+</table>
+
+<h2 id="heading5">ENVIRONMENT
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="11%"></col>
+<col width="1%" class="center"></col>
+<col width="60%"></col>
+<col width="17%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p style="margin-top: 1em"><b>DISPLAY</b></p></td>
+<td></td>
+<td>
+
+
+<p style="margin-top: 1em">To get default host and display
+number.</p> </td>
+<td>
+</td></tr>
+</table>
+
+<h2 id="heading6">FILES
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>XWDFile.h</b></p>
+
+<p style="margin-left:23%;">X Window Dump File format
+definition file.</p>
+
+<h2 id="heading7">SEE ALSO
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><a href="../man1/xwud.1.xhtml"><em>xwud</em>(1)</a>,
+<a href="../man7/X.7.xhtml"><em>X</em>(7)</a></p>
+
+<h2 id="heading8">AUTHORS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Tony Della
+Fera, Digital Equipment Corp., MIT Project Athena <br/>
+William F. Wyatt, Smithsonian Astrophysical Observatory</p>
+<hr/>
+</body>
+</html>

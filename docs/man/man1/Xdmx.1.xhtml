@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+ "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"
+ [<!ENTITY mathml "http://www.w3.org/1998/Math/MathML">]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<link href="http://www.x.org/" rel="home" />
+<link href="index.xhtml" rel="up" />
+<link rel="SHORTCUT ICON" href="../../../favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../../../xorg.css" />
+<meta name="generator" content="groff -Txhtml, see www.gnu.org"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="Content-Style" content="text/css"/>
+<style type="text/css">
+       .center { text-align: center }
+       .right  { text-align: right }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<!-- Creator     : groff version 1.20.1 -->
+<!-- CreationDate: Sun Apr 15 13:23:00 2012 -->
+<title>Xdmx</title>
+
+</head>
+<body>
+
+<h1>Xdmx</h1>
+
+<p><a href="#heading1">NAME</a><br/>
+<a href="#heading2">SYNOPSIS</a><br/>
+<a href="#heading3">DESCRIPTION</a><br/>
+<a href="#heading4">OPTIONS</a><br/>
+<a href="#heading5">CONFIGURATION FILE GRAMMAR</a><br/>
+<a href="#heading6">CONFIGURATION FILE EXAMPLES</a><br/>
+<a href="#heading7">FONT PATHS</a><br/>
+<a href="#heading8">COMMAND-LINE EXAMPLES</a><br/>
+<a href="#heading9">USING THE USB DEVICE DRIVERS</a><br/>
+<a href="#heading10">KEYBOARD INITIALIZATION</a><br/>
+<a href="#heading11">MULTIPLE CORE KEYBOARDS</a><br/>
+<a href="#heading12">SEE ALSO</a><br/>
+<a href="#heading13">AUTHORS</a><br/>
+
+</p>
+<hr/>
+
+
+<h2 id="heading1">NAME
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Xdmx -
+Distributed Multi-head X server</p>
+
+<h2 id="heading2">SYNOPSIS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Xdmx</b>
+[:display] [option ...]</p>
+
+<h2 id="heading3">DESCRIPTION
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><i>Xdmx</i> is
+a proxy X server that uses one or more other X servers as
+its display devices. It provides multi-head X functionality
+for displays that might be located on different machines.
+<i>Xdmx</i> functions as a front-end X server that acts as a
+proxy to a set of back-end X servers. All of the visible
+rendering is passed to the back-end X servers. Clients
+connect to the <i>Xdmx</i> front-end, and everything appears
+as it would in a regular multi-head configuration. If
+Xinerama is enabled (e.g., with <b>+xinerama</b> on the
+command line), the clients see a single large screen.</p>
+
+<p style="margin-left:11%; margin-top: 1em"><i>Xdmx</i>
+communicates to the back-end X servers using the standard
+X11 protocol, and standard and/or commonly available X
+server extensions.</p>
+
+<h2 id="heading4">OPTIONS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">In addition to
+the normal X server options described in the
+<i><a href="../man1/Xserver.1.xhtml"><em>Xserver</em>(1)</a></i> manual page, <i>Xdmx</i> accepts the
+following command line switches: <b><br/>
+&minus;display</b> <i>display-name</i></p>
+
+<p style="margin-left:23%;">This specifies the name(s) of
+the back-end X server display(s) to connect to. This option
+may be specified multiple times to connect to more than one
+back-end display. The first is used as screen 0, the second
+as screen 1, etc. If this option is omitted, the
+<b>$DISPLAY</b> environment variable is used as the single
+back-end X server display.</p>
+
+<p style="margin-left:11%;"><b>&minus;xinput</b>
+<i>input-source</i></p>
+
+<p style="margin-left:23%;">This specifies the source to
+use for XInput extension devices. The choices are the same
+as for <b>&minus;input</b> , described below, except that
+core devices on backend servers cannot be treated as XInput
+extension devices. (Although extension devices on backend
+and console servers are supported as extension devices under
+<i>Xdmx</i>).</p>
+
+<p style="margin-left:11%;"><b>&minus;input</b>
+<i>input-source</i></p>
+
+<p style="margin-left:23%;">This specifies the source to
+use for the core input devices. The choices are: <b><br/>
+dummy</b></p>
+
+<p style="margin-left:29%;">A set of dummy core input
+drivers are used. These never generate any input events.</p>
+
+<p style="margin-left:23%;"><b>local</b></p>
+
+<p style="margin-left:29%;">The raw keyboard and pointer
+from the local computer are used. A comma-separated list of
+driver names can be appended. For example, to select the
+example Linux keyboard and PS/2 mouse driver use: <b>-input
+local,kbd,ps2</b>. The following drivers have been
+implemented for Linux: kbd, ms (a two-button Microsoft mouse
+driver), ps2 (a PS/2 mouse driver), usb-mou (a USB mouse
+driver), usb-kbd (a USB keyboard driver), and usb-oth (a USB
+non-keyboard, non-mouse driver). Additional drivers may be
+implemented in the future. Appropriate defaults will be used
+if no comma-separated list is provided.</p>
+
+<p style="margin-left:23%;"><i>display-name</i></p>
+
+<p style="margin-left:29%;">If the display-name is a
+back-end server, then core input events are taken from the
+server specified. Otherwise, a console window will be opened
+on the specified display.</p>
+
+<p style="margin-left:29%; margin-top: 1em">If the
+<i>display-name</i> is followed by &quot;,xi&quot; then
+XInput extension devices on the display will be used as
+<i>Xdmx</i> XInput extension devices. If the
+<i>display-name</i> is followed by &quot;,noxi&quot; then
+XInput extension devices on the display will <b>not</b> be
+used as <i>Xdmx</i> XInput extension devices. Currently, the
+default is &quot;,xi&quot;.</p>
+
+<p style="margin-left:29%; margin-top: 1em">If the
+<i>display-name</i> is followed by &quot;,console&quot; and
+the <i>display-name</i> refers to a display that is used as
+a backend display, then a console window will be opened on
+that display <b>and</b> that display will be treated as a
+backend display. Otherwise (or if &quot;,noconsole&quot; is
+used), the display will be treated purely as a backend or a
+console display, as described above.</p>
+
+<p style="margin-left:29%; margin-top: 1em">If the
+<i>display-name</i> is followed by &quot;,windows&quot;,
+then outlines of the windows on the backend will be
+displayed inside the console window. Otherwise (or if
+&quot;,nowindows&quot; is used), the console window will not
+display the outlines of backend windows. (This option only
+applies to console input.)</p>
+
+<p style="margin-left:29%; margin-top: 1em">If the
+<i>display-name</i> is followed by &quot;,xkb&quot;, then
+the next 1 to 3 comma-separated parameters will specify the
+keycodes, symbols, and geometry of the keyboard for this
+input device. For example, &quot;,xkb,xfree86,pc104&quot;
+will specify that the &quot;xfree86&quot; keycodes and the
+&quot;pc104&quot; symbols should be used to initialize the
+keyboard. For an SGI keyboard,
+&quot;,xkb,sgi/indy(pc102)&quot; might be useful. A list of
+keycodes, symbols, and geometries can be found in
+<i>/usr/share/X11/xkb</i>. Use of
+keycodes, symbols and geometries for XKB configuration is
+deprecated in favor of the rules, layout, model, variant and
+options settings available via the -param command line
+switch. If this option is not specified, the input device
+will be queried, perhaps using the XKEYBOARD extension.</p>
+
+<p style="margin-left:23%; margin-top: 1em">If this option
+isn&rsquo;t specified, the default input source is the first
+back-end server (the one used for screen 0). The console
+window shows the layout of the back-end display(s) and
+pointer movements and key presses within the console window
+will be used as core input devices.</p>
+
+<p style="margin-left:23%; margin-top: 1em">Several special
+function keys are active, depending on the input source:</p>
+
+
+<p style="margin-left:34%; margin-top: 1em"><b>Ctrl-Alt-q</b>
+will terminate the <i>Xdmx</i> server in all modes.</p>
+
+
+<p style="margin-left:34%; margin-top: 1em"><b>Ctrl-Alt-g</b>
+will toggle a server grab in console mode (a special cursor,
+currently a spider, is used to indicate an active server
+grab).</p>
+
+
+<p style="margin-left:34%; margin-top: 1em"><b>Ctrl-Alt-f</b>
+will toggle fine-grain motion in console mode (a special
+cursor, currently a cross hair, is used to indicate this
+mode). If this mode is combined with a server grab, then the
+cursor will have 4 lines instead of only 2.</p>
+
+
+<p style="margin-left:34%; margin-top: 1em"><b>Ctrl-Alt-F1</b>
+through <b>Ctrl-Alt-F12</b> will switch to another VC in
+local (raw) mode.</p>
+
+<p style="margin-left:11%;"><b>-shadowfb</b></p>
+
+<p style="margin-left:23%;">This option turns on (legacy)
+support for the shadow frame buffer.</p>
+
+<p style="margin-left:11%;"><b>-noshadowfb</b></p>
+
+<p style="margin-left:23%;">This option turns off (legacy)
+support for the shadow frame buffer. Note that this option
+has been deprecated and will be removed in the next
+release.</p>
+
+<p style="margin-left:11%;"><b>-nomulticursor</b></p>
+
+<p style="margin-left:23%;">This option turns off support
+for displaying multiple cursors on overlapped back-end
+displays. This option is available for testing and
+benchmarking purposes.</p>
+
+<p style="margin-left:11%;"><b>-fontpath</b></p>
+
+<p style="margin-left:23%;">This option sets the
+<i>Xdmx</i> server&rsquo;s default font path. This option
+can be specified multiple times to accommodate multiple font
+paths. See the <b>FONT PATHS</b> section below for very
+important information regarding setting the default font
+path.</p>
+
+<p style="margin-left:11%;"><b>-configfile</b>
+<i>filename</i></p>
+
+<p style="margin-left:23%;">Specify the configuration file
+that should be read. Note that if the <b>&minus;display</b>
+command-line option is used, then the configuration file
+will be ignored.</p>
+
+<p style="margin-left:11%;"><b>-config</b> <i>name</i></p>
+
+<p style="margin-left:23%;">Specify a configuration to use.
+The <i>name</i> will be the name following the
+<b>virtual</b> keyword in the configuration file.</p>
+
+<p style="margin-left:11%;"><b>-stat</b> <i>interval
+screens</i></p>
+
+<p style="margin-left:23%;">This option enables the display
+of performance statistics. The interval is in seconds. The
+screens is a count of the number of back-end screens for
+which data is printed each interval. Specifying 0 for
+screens will display data for all screens.</p>
+
+<p style="margin-left:23%; margin-top: 1em">For each
+screen, the following information is printed: the screen
+number, an absolute count of the number of XSync() calls
+made (SyncCount), the rate of these calls during the
+previous interval (Sync/s), the average round-trip time (in
+microseconds) of the last 10 XSync() calls (avSync), the
+maximum round-trip time (in microseconds) of the last 10
+XSync calls (mxSync), the average number of XSync() requests
+that were pending but not yet processed for each of the last
+10 processed XSync() calls, the maximum number of XSync()
+requests that were pending but not yet processed for each of
+the last 10 processed XSync() calls, and a histogram showing
+the distribution of the times of all of the XSync() calls
+that were made during the previous interval.</p>
+
+<p style="margin-left:23%; margin-top: 1em">(The length of
+the moving average and the number and value of histogram
+bins are configurable at compile time in the
+<b>dmxstat.h</b> header file.)</p>
+
+<p style="margin-left:11%;"><b>-syncbatch</b>
+<i>interval</i></p>
+
+<p style="margin-left:23%;">This option sets the
+<i>interval</i> in milliseconds for XSync() batching. An
+<i>interval</i> less than or equal to 0 will disable XSync()
+batching. The default <i>interval</i> is 100 ms.</p>
+
+<p style="margin-left:11%;"><b>-nooffscreenopt</b></p>
+
+<p style="margin-left:23%;">This option disables the
+offscreen optimization. Since the lazy window creation
+optimization requires the offscreen optimization to be
+enabled, this option will also disable the lazy window
+creation optimization.</p>
+
+<p style="margin-left:11%;"><b>-nowindowopt</b></p>
+
+<p style="margin-left:23%;">This option disables the lazy
+window creation optimization.</p>
+
+<p style="margin-left:11%;"><b>-nosubdivprims</b></p>
+
+<p style="margin-left:23%;">This option disables the
+primitive subdivision optimization.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="9%"></col>
+<col width="3%" class="center"></col>
+<col width="77%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-noxkb</b></p></td>
+<td></td>
+<td>
+
+
+<p>Disable use of the XKB extension for communication with
+the back end displays. (Combine with <b>-kb</b> to disable
+all use of XKB.)</p></td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>-depth</b> <i>int</i></p>
+
+<p style="margin-left:23%;">This option sets the root
+window&rsquo;s default depth. When choosing a default visual
+from those available on the back-end X server, the first
+visual with that matches the depth specified is used.</p>
+
+<p style="margin-left:23%; margin-top: 1em">This option can
+be combined with the <b>-cc</b> option, which specifies the
+default color visual class, to force the use of a specific
+depth and color class for the root window.</p>
+
+<p style="margin-left:11%;"><b>-norender</b></p>
+
+<p style="margin-left:23%;">This option disables the RENDER
+extension.</p>
+
+<p style="margin-left:11%;"><b>-noglxproxy</b></p>
+
+<p style="margin-left:23%;">This option disables GLX proxy
+-- the build-in GLX extension implementation that is DMX
+aware.</p>
+
+<p style="margin-left:11%;"><b>-noglxswapgroup</b></p>
+
+<p style="margin-left:23%;">This option disables the swap
+group and swap barrier extensions in GLX proxy.</p>
+
+<p style="margin-left:11%;"><b>-glxsyncswap</b></p>
+
+<p style="margin-left:23%;">This option enables
+synchronization after a swap buffers call by waiting until
+all X protocol has been processed. When a client issues a
+glXSwapBuffers request, Xdmx relays that request to each
+back-end X server, and those requests are buffered along
+with all other protocol requests. However, in systems that
+have large network buffers, this buffering can lead to the
+set of back-end X servers handling the swap buffers request
+asynchronously. With this option, an XSync() request is
+issued to each back-end X server after sending the swap
+buffers request. The XSync() requests will flush all
+buffered protocol (including the swap buffers requests) and
+wait until the back-end X servers have processed those
+requests before continuing. This option does not wait until
+all GL commands have been processed so there might be
+previously issued commands that are still being processed in
+the GL pipe when the XSync() request returns. See the
+<b>-glxfinishswap</b> option below if Xdmx should wait until
+the GL commands have been processed.</p>
+
+<p style="margin-left:11%;"><b>-glxfinishswap</b></p>
+
+<p style="margin-left:23%;">This option enables
+synchronization after a swap buffers call by waiting until
+all GL commands have been completed. It is similar to the
+<b>-glxsyncswap</b> option above; however, instead of
+issuing an XSync(), it issues a glFinish() request to each
+back-end X server after sending the swap buffers requests.
+The glFinish() request will flush all buffered protocol
+requests, process both X and GL requests, and wait until all
+previously called GL commands are complete before
+returning.</p>
+
+<p style="margin-left:11%;"><b>-ignorebadfontpaths</b></p>
+
+<p style="margin-left:23%;">This option ignores font paths
+that are not available on all back-end servers by removing
+the bad font path(s) from the default font path list. If no
+valid font paths are left after removing the bad paths, an
+error to that effect is printed in the log.</p>
+
+<p style="margin-left:11%;"><b>-addremovescreens</b></p>
+
+<p style="margin-left:23%;">This option enables the dynamic
+addition and removal of screens, which is disabled by
+default. Note that GLXProxy and Render do not yet support
+dynamic addition and removal of screens, and must be
+disabled via the <b>-noglxproxy</b> and <b>-norender</b>
+command line options described above.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<colgroup><col width="11%"></col>
+<col width="9%"></col>
+<col width="3%" class="center"></col>
+<col width="77%"></col>
+</colgroup>
+<tr valign="top" align="left">
+<td></td>
+<td>
+
+
+<p><b>-param</b></p></td>
+<td></td>
+<td>
+
+
+<p>This option specifies parameters on the command line.
+Currently, only parameters dealing with XKEYBOARD
+configuration are supported. These parameters apply only to
+the core keyboard. Parameter values are
+installation-dependent. Please see
+<i>/usr/share/X11/xkb</i> or a similar
+directory for complete information.</p></td></tr>
+</table>
+
+<p style="margin-left:23%;"><b>XkbRules</b></p>
+
+<p style="margin-left:35%;">Defaults to &quot;evdev&quot;.
+Other values may include &quot;sgi&quot; and
+&quot;sun&quot;.</p>
+
+<p style="margin-left:23%;"><b>XkbModel</b></p>
+
+<p style="margin-left:35%;">Defaults to &quot;pc105&quot;.
+When used with &quot;base&quot; rules, other values may
+include &quot;pc102&quot;, &quot;pc104&quot;,
+&quot;microsoft&quot;, and many others. When used with
+&quot;sun&quot; rules, other values may include
+&quot;type4&quot; and &quot;type5&quot;.</p>
+
+<p style="margin-left:23%;"><b>XkbLayout</b></p>
+
+<p style="margin-left:35%;">Defaults to &quot;us&quot;.
+Other country codes and &quot;dvorak&quot; are usually
+available.</p>
+
+<p style="margin-left:23%;"><b>XkbVariant</b></p>
+
+<p style="margin-left:35%;">Defaults to &quot;&quot;.</p>
+
+<p style="margin-left:23%;"><b>XkbOptions</b></p>
+
+<p style="margin-left:35%;">Defaults to &quot;&quot;.</p>
+
+<h2 id="heading5">CONFIGURATION FILE GRAMMAR
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The following
+words and tokens are reserved:</p>
+
+<p style="margin-left:22%;"><b>virtual display wall option
+param { } ; #</b></p>
+
+<p style="margin-left:11%; margin-top: 1em">Comments start
+with a <b>#</b> mark and extend to the end of the line. They
+may appear anywhere. If a configuration file is read into
+<b>xdmxconfig</b>, the comments in that file will be
+preserved, but will not be editable.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The grammar is
+as follows:</p>
+
+<p style="margin-left:22%;">virtual-list ::= [ virtual-list
+] | virtual</p>
+
+<p style="margin-left:22%; margin-top: 1em">virtual ::=
+<b>virtual</b> [ name ] [ dim ] <b>{</b> dw-list
+<b>}</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">dw-list ::= [
+dw-list ] | dw</p>
+
+<p style="margin-left:22%; margin-top: 1em">dw ::= display
+| wall | option</p>
+
+<p style="margin-left:22%; margin-top: 1em">display ::=
+<b>display</b> name [ geometry ] [ / geometry ] [ origin ]
+<b>;</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">wall ::=
+<b>wall</b> [ dim ] [ dim ] name-list <b>;</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">option ::=
+<b>option</b> name-list <b>;</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">param ::=
+<b>param</b> name-list <b>;</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">param ::=
+<b>param {</b> param-list <b>}</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">param-list ::=
+[ param-list ] | name-list <b>;</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">name-list ::= [
+name-list ] | name</p>
+
+<p style="margin-left:22%; margin-top: 1em">name ::= string
+| double-quoted-string</p>
+
+<p style="margin-left:22%; margin-top: 1em">dim ::= integer
+<b>x</b> integer</p>
+
+<p style="margin-left:22%; margin-top: 1em">geometry ::= [
+integer <b>x</b> integer ] [ signed-integer signed-integer
+]</p>
+
+<p style="margin-left:22%; margin-top: 1em">origin ::=
+<b>@</b> integer <b>x</b> integer</p>
+
+<p style="margin-left:11%; margin-top: 1em">The name
+following <b>virtual</b> is used as an identifier for the
+configuration, and may be passed to <b>Xdmx</b> using the
+<b>&minus;config</b> command line option. The name of a
+display should be standard X display name, although no
+checking is performed (e.g., &quot;machine:0&quot;).</p>
+
+<p style="margin-left:11%; margin-top: 1em">For names,
+double quotes are optional unless the name is reserved or
+contains spaces.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The first
+dimension following <b>wall</b> is the dimension for tiling
+(e.g., 2x4 or 4x4). The second dimension following
+<b>wall</b> is the dimension of each display in the wall
+(e.g., 1280x1024).</p>
+
+<p style="margin-left:11%; margin-top: 1em">The first
+geometry following <b>display</b> is the geometry of the
+screen window on the backend server. The second geometry,
+which is always preceeded by a slash, is the geometry of the
+root window. By default, the root window has the same
+geometry as the screen window.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The
+<b>option</b> line can be used to specify any command-line
+options (e.g., <b>&minus;input</b>). (It cannot be used to
+specify the name of the front-end display.) The option line
+is processed once at server startup, just line command line
+options. This behavior may be unexpected.</p>
+
+<h2 id="heading6">CONFIGURATION FILE EXAMPLES
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Two displays
+being used for a desktop may be specified in any of the
+following formats:</p>
+
+<p style="margin-left:22%;">virtual example0 { <br/>
+display d0:0 1280x1024 @0x0; <br/>
+display d1:0 1280x1024 @1280x0; <br/>
+}</p>
+
+<p style="margin-left:22%; margin-top: 1em">virtual
+example1 { <br/>
+display d0:0 1280x1024; <br/>
+display d1:0 @1280x0; <br/>
+}</p>
+
+<p style="margin-left:22%; margin-top: 1em">virtual
+example2 { <br/>
+display &quot;d0:0&quot;; <br/>
+display &quot;d1:0&quot; @1280x0; <br/>
+}</p>
+
+<p style="margin-left:22%; margin-top: 1em">virtual
+example3 { wall 2x1 d0:0 d1:0; }</p>
+
+<p style="margin-left:11%;">A 4x4 wall of 16 total displays
+could be specified as follows (if no tiling dimension is
+specified, an approximate square is used):</p>
+
+<p style="margin-left:22%;">virtual example4 { <br/>
+wall d0:0 d1:0 d2:0 d3:0 <br/>
+d4:0 d5:0 d6:0 d7:0 <br/>
+d8:0 d9:0 da:0 db:0 <br/>
+dc:0 dd:0 de:0 df:0; <br/>
+}</p>
+
+<h2 id="heading7">FONT PATHS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The font path
+used by the <i>Xdmx</i> front-end server will be propagated
+to each back-end server,which requires that each back-end
+server have access to the exact same font paths as the
+front-end server. This can be most easily handled by either
+using a font server (e.g., xfs) or by remotely mounting the
+font paths on each back-end server, and then setting the
+<i>Xdmx</i> server&rsquo;s default font path with the -I
+&quot;-fontpath&quot; command line option described
+above.</p>
+
+<p style="margin-left:11%; margin-top: 1em">For example, if
+you specify a font path with the following command line:</p>
+
+<p style="margin-left:22%;">Xdmx :1 -display d0:0 -fontpath
+/usr/fonts/75dpi/ -fontpath /usr/fonts/Type1/ +xinerama</p>
+
+<p style="margin-left:11%;">Then, /usr/fonts/75dpi/ and
+/usr/fonts/Type1/ must be valid font paths on the
+<i>Xdmx</i> server and all back-end server, which is d0 in
+this example.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Font servers
+can also be specified with the <i>-fontpath</i> option. For
+example, let&rsquo;s assume that a properly configured font
+server is running on host d0. Then, the following command
+line</p>
+
+<p style="margin-left:22%;">Xdmx :1 -display d0:0 -display
+d1:0 -fontpath tcp/d0:7100 +xinerama</p>
+
+<p style="margin-left:11%;">will initialize the front-end
+<i>Xdmx</i> server and each of the back-end servers to use
+the font server on d0.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Some fonts
+might not be supported by either the front-end or the
+back-end servers. For example, let&rsquo;s assume the
+front-end <i>Xdmx</i> server includes support Type1 fonts,
+but one of the back-end servers does not. Let&rsquo;s also
+assume that the default font path for <i>Xdmx</i> includes
+Type1 fonts in its font path. Then, when <i>Xdmx</i>
+initializes the default font path to load the default font,
+the font path that includes Type1 fonts (along with the
+other default font paths that are used by the <i>Xdmx</i>
+server) is sent to the back-end server that cannot handle
+Type1 fonts. That back-end server then rejects the font path
+and sends an error back to the <i>Xdmx</i> server.
+<i>Xdmx</i> then prints an error message and exits because
+it failed to set the default font path and was unable load
+the default font.</p>
+
+<p style="margin-left:11%; margin-top: 1em">To fix this
+error, the offending font path must be removed from the
+default font path by using a different <i>-fontpath</i>
+command line option.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The
+<i>-fontpath</i> option can also be added to the
+configuration file as described above.</p>
+
+<h2 id="heading8">COMMAND-LINE EXAMPLES
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The back-end
+machines are d0 and d1, core input is from the pointer and
+keyboard attached to d0, clients will refer to :1 when
+opening windows:</p>
+
+<p style="margin-left:22%;">Xdmx :1 -display d0:0 -display
+d1:0 +xinerama</p>
+
+<p style="margin-left:11%; margin-top: 1em">As above,
+except with core input from d1:</p>
+
+<p style="margin-left:22%;">Xdmx :1 -display d0:0 -display
+d1:0 -input d1:0 +xinerama</p>
+
+<p style="margin-left:11%; margin-top: 1em">As above,
+except with core input from a console window on the local
+display:</p>
+
+<p style="margin-left:22%;">Xdmx :1 -display d0:0 -display
+d1:0 -input :0 +xinerama</p>
+
+<p style="margin-left:11%; margin-top: 1em">As above,
+except with core input from the local keyboard and
+mouse:</p>
+
+<p style="margin-left:22%;">Xdmx :1 -display d0:0 -display
+d1:0 -input local,kbd,ps2 +xinerama</p>
+
+<p style="margin-left:11%;">Note that local input can be
+used under Linux while another X session is running on :0
+(assuming the user can access the Linux console tty and
+mouse devices): a new (blank) VC will be used for keyboard
+input on the local machine and the Ctrl-Alt-F* sequence will
+be available to change to another VC (possibly back to
+another X session running on the local machine). Using
+Ctrl-Alt-Backspace on the blank VC will terminate the Xdmx
+session and return to the original VC.</p>
+
+<p style="margin-left:11%; margin-top: 1em">This example
+uses the configuration file shown in the previous
+section:</p>
+
+<p style="margin-left:22%;">Xdmx :1 -input :0 +xinerama
+-configfile filename -config example2</p>
+
+<p style="margin-left:11%;">With this configuration file
+line:</p>
+
+<p style="margin-left:22%;">option -input :0 +xinerama;</p>
+
+<p style="margin-left:11%;">the command line can be
+shortened to:</p>
+
+<p style="margin-left:22%;">Xdmx :1 -configfile filename
+-config example2</p>
+
+<h2 id="heading9">USING THE USB DEVICE DRIVERS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The USB device
+drivers use the devices called <i>/dev/input/event0</i>,
+<i>/dev/input/event1</i>, etc. under Linux. These devices
+are driven using the <i>evdev</i> Linux kernel module, which
+is part of the hid suite. Please note that if you load the
+<i>mousedev</i> or <i>kbddev</i> Linux kernel modules, then
+USB devices will appear as core Linux input devices and you
+will not be able to select between using the device only as
+an <i>Xdmx</i> core device or an <i>Xdmx</i> XInput
+extension device. Further, you may be unable to unload the
+<i>mousedev</i> Linux kernel module if <i>XFree86</i> is
+configured to use <i>/dev/input/mice</i> as an input device
+(this is quite helpful for laptop users and is set up by
+default under some Linux distributions, but should be
+changed if USB devices are to be used with <i>Xdmx</i>).</p>
+
+<p style="margin-left:11%; margin-top: 1em">The USB device
+drivers search through the Linux devices for the first
+mouse, keyboard, or non-mouse-non-keyboard Linux device and
+use that device.</p>
+
+<h2 id="heading10">KEYBOARD INITIALIZATION
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">If <i>Xdmx</i>
+was invoked with <i>&minus;xkb</i> or was <b>not</b>
+compiled to use the XKEYBOARD extension, then a keyboard on
+a backend or console will be initialized using the map that
+the host X server provides.</p>
+
+<p style="margin-left:11%; margin-top: 1em">If the
+XKEYBOARD extension is used for both <i>Xdmx</i> and the
+host X server for the keyboard (i.e., the backend or console
+X server), then the type of the keyboard will be obtained
+from the host X server and the keyboard under <i>Xdmx</i>
+will be initialized with that information. Otherwise, the
+default type of keyboard will be initialized. In both cases,
+the map from the host X server will <b>not</b> be used. This
+means that different initial behavior may be noted with and
+without XKEYBOARD. Consistent and expected results will be
+obtained by running XKEYBOARD on all servers and by avoiding
+the use of <i>xmodmap</i> on the backend or console X
+servers prior to starting <i>Xdmx</i>.</p>
+
+<p style="margin-left:11%; margin-top: 1em">If
+<i>&minus;xkbmap</i> is specified on the <i>Xdmx</i> command
+line, then that map will currently be used for all
+keyboards.</p>
+
+<h2 id="heading11">MULTIPLE CORE KEYBOARDS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">X was not
+designed to support multiple core keyboards. However,
+<i>Xdmx</i> provides some support for multiple core
+keyboards. Best results will be obtained if all of the
+keyboards are of the same type and are using the same
+keyboard map. Because the X server passes raw key code
+information to the X client, key symbols for keyboards with
+different key maps would be different if the key code for
+each keyboard was sent without translation to the client.
+Therefore, <i>Xdmx</i> will attempt to translate the key
+code from a core keyboard to the key code for the key with
+the same key symbol of the <b>first</b> core keyboard that
+was loaded. If the key symbol appears in both maps, the
+results will be expected. Otherwise, the second core
+keyboard will return a NoSymbol key symbol for some keys
+that would have been translated if it was the first core
+keyboard.</p>
+
+<h2 id="heading12">SEE ALSO
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><a href="../man3/DMX.3.xhtml"><em>DMX</em>(3)</a>,
+<a href="../man7/X.7.xhtml"><em>X</em>(7)</a>, <a href="../man1/Xserver.1.xhtml"><em>Xserver</em>(1)</a>, <a href="../man1/xdmxconfig.1.xhtml"><em>xdmxconfig</em>(1)</a>,
+<a href="../man1/vdltodmx.1.xhtml"><em>vdltodmx</em>(1)</a>, <a href="../man1/xfs.1.xhtml"><em>xfs</em>(1)</a>, <a href="../man1/xkbcomp.1.xhtml"><em>xkbcomp</em>(1)</a>,
+<a href="../man7/xkeyboard-config.7.xhtml"><em>xkeyboard-config</em>(7)</a></p>
+
+<h2 id="heading13">AUTHORS
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Kevin E. Martin
+<i>&lt;kem@redhat.com&gt;,</i> David H. Dawes
+<i>&lt;dawes@xfree86.org&gt;,</i> and Rickard E. (Rik) Faith
+<i>&lt;faith@redhat.com&gt;</i>.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Portions of
+<i>Xdmx</i> are based on code from The XFree86 Project
+(<i>http://www.xfree86.org</i>) and X.Org
+(<i>http://www.x.org</i>).</p>
+<hr/>
+</body>
+</html>
