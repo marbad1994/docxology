@@ -49,8 +49,8 @@ Use a normalized catalog as the long-term source of truth:
 `fetch_docs.py` now writes:
 
 - `search_index.js` for the current app
-- `docs/search_index.json` as data-only search input
-- `docs/catalog.json` as a recursive catalog grouped by path segments
-- `docs/manifest.json` with schema metadata
+- `docs.xorg/search_index.json` as data-only search input
+- `docs.xorg/catalog.json` as a recursive catalog grouped by path segments
+- `docs.xorg/manifest.json` with schema metadata
 
 That lets us preserve current output while moving toward a generic document browser that can import many source types and arbitrary nesting depths.

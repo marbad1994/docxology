@@ -15,7 +15,7 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 BASE_URL = 'https://www.x.org/releases/current/doc/'
-OUT_DIR = Path(__file__).parent / 'docs'
+OUT_DIR = Path(__file__).parent / 'docs.xorg'
 INDEX_FILE = Path(__file__).parent / 'search_index.js'
 SEARCH_JSON_FILE = OUT_DIR / 'search_index.json'
 CATALOG_FILE = OUT_DIR / 'catalog.json'
