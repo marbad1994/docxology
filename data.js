@@ -283,3 +283,106 @@ const DOCS_DATA = [
     ]
   },
 ];
+
+
+function slugifyCatalogPart(value, fallback) {
+  const base = String(value || fallback || 'item')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return base || fallback || 'item';
+}
+
+function createCatalogDocumentNode(item, sectionId, index) {
+  const safeFormats = Array.isArray(item && item.formats) && item.formats.length ? item.formats.slice() : ['txt'];
+  const safeTags = Array.isArray(item && item.tags) ? item.tags.slice() : [];
+  const sourcePath = item && item.href ? item.href : `generated/${sectionId}/${index}`;
+  return {
+    type: 'document',
+    id: item && item.id ? item.id : `doc:${sectionId}:${slugifyCatalogPart(sourcePath, String(index))}`,
+    title: item && item.title ? item.title : sourcePath,
+    href: item && item.href ? item.href : null,
+    formats: safeFormats,
+    tags: safeTags,
+    meta: {
+      source_path: sourcePath,
+      legacy_section_id: sectionId,
+    },
+  };
+}
+
+function createCatalogGroupNode(section, index) {
+  const sectionId = section && section.id ? section.id : `section-${index}`;
+  const items = Array.isArray(section && section.items) ? section.items : [];
+  return {
+    type: 'group',
+    id: sectionId,
+    title: section && section.title ? section.title : `Section ${index + 1}`,
+    icon: section && section.icon ? section.icon : 'book',
+    description: section && section.description ? section.description : '',
+    children: items.map((item, itemIndex) => createCatalogDocumentNode(item, sectionId, itemIndex)),
+  };
+}
+
+function createCatalogFromLegacySections(sections) {
+  const safeSections = Array.isArray(sections) ? sections : [];
+  return {
+    schema_version: 1,
+    type: 'catalog',
+    title: 'X.Org Documentation Catalog',
+    roots: safeSections.map((section, index) => createCatalogGroupNode(section, index)),
+  };
+}
+
+function flattenCatalogDocuments(nodes, ancestors, result) {
+  const safeNodes = Array.isArray(nodes) ? nodes : [];
+  const safeAncestors = Array.isArray(ancestors) ? ancestors : [];
+  const out = Array.isArray(result) ? result : [];
+
+  safeNodes.forEach((node, index) => {
+    if (!node || typeof node !== 'object') return;
+
+    if (node.type === 'document') {
+      const sourcePath = node.href || (node.meta && node.meta.source_path) || `generated/${index}`;
+      out.push({
+        id: node.id || `doc:${slugifyCatalogPart(sourcePath, String(index))}`,
+        title: node.title || sourcePath,
+        href: node.href || null,
+        formats: Array.isArray(node.formats) && node.formats.length ? node.formats.slice() : ['txt'],
+        tags: Array.isArray(node.tags) ? node.tags.slice() : [],
+        path: node.path || null,
+        url: node.url || null,
+        breadcrumbs: safeAncestors.map(ancestor => ancestor.title).filter(Boolean),
+      });
+      return;
+    }
+
+    const children = Array.isArray(node.children) ? node.children : [];
+    flattenCatalogDocuments(children, safeAncestors.concat({
+      id: node.id || `group-${index}`,
+      title: node.title || '',
+    }), out);
+  });
+
+  return out;
+}
+
+function buildLegacySectionsFromCatalog(catalog) {
+  const roots = catalog && Array.isArray(catalog.roots) ? catalog.roots : [];
+  return roots
+    .filter(root => root && typeof root === 'object')
+    .map((root, index) => ({
+      id: root.id || `section-${index}`,
+      title: root.title || `Section ${index + 1}`,
+      icon: root.icon || 'book',
+      description: root.description || '',
+      items: flattenCatalogDocuments(Array.isArray(root.children) ? root.children : [], [], []).map((item) => ({
+        title: item.title,
+        href: item.href || item.path || item.id,
+        formats: item.formats,
+        tags: item.tags,
+      })),
+    }));
+}
+
+const DOCS_CATALOG = createCatalogFromLegacySections(DOCS_DATA);

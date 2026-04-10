@@ -19,25 +19,25 @@
 
 /* --- Dark theme: warm slate tones --- */
 [data-theme="dark"] {
-  --bg-primary: #141519;
-  --bg-secondary: #1a1b22;
-  --bg-tertiary: #22232d;
-  --bg-hover: #2a2b38;
-  --bg-active: #323342;
-  --bg-card: #1e1f28;
-  --bg-card-hover: #262733;
-  --bg-doc: #1a1b22;
-  --border: #2d2e3a;
-  --border-subtle: #24252f;
-  --text-primary: #dcdee6;
-  --text-secondary: #9496a8;
-  --text-tertiary: #62647a;
-  --text-doc: #c8cad6;
-  --text-doc-heading: #e8e9f0;
-  --accent: #6e9eff;
-  --accent-dim: rgba(110, 158, 255, 0.10);
-  --accent-hover: #8fb4ff;
-  --accent-text: #6e9eff;
+  --bg-primary: #12141a;
+  --bg-secondary: #181b23;
+  --bg-tertiary: #202531;
+  --bg-hover: #2a3140;
+  --bg-active: #33405a;
+  --bg-card: #1c212c;
+  --bg-card-hover: #242b38;
+  --bg-doc: #171b24;
+  --border: #31394a;
+  --border-subtle: #262d3a;
+  --text-primary: #e3e8f2;
+  --text-secondary: #a3afc2;
+  --text-tertiary: #73809a;
+  --text-doc: #d0d8e6;
+  --text-doc-heading: #f1f5fb;
+  --accent: #5aa2ff;
+  --accent-dim: rgba(90, 162, 255, 0.18);
+  --accent-hover: #87bcff;
+  --accent-text: #78b2ff;
   --green: #5cd590;
   --orange: #f0a050;
   --red: #ee6b6b;
@@ -61,25 +61,25 @@
 
 /* --- Light theme: clean warm white --- */
 [data-theme="light"] {
-  --bg-primary: #fafafa;
-  --bg-secondary: #f2f2f5;
-  --bg-tertiary: #eaeaef;
-  --bg-hover: #e2e2ea;
-  --bg-active: #d8d8e2;
+  --bg-primary: #f7f8fb;
+  --bg-secondary: #eef1f6;
+  --bg-tertiary: #e3e8f1;
+  --bg-hover: #d9e0ec;
+  --bg-active: #ccd8ea;
   --bg-card: #ffffff;
-  --bg-card-hover: #f6f6fa;
+  --bg-card-hover: #f3f7fd;
   --bg-doc: #ffffff;
-  --border: #d8d8e2;
-  --border-subtle: #e8e8ef;
-  --text-primary: #1c1d26;
-  --text-secondary: #5c5e72;
-  --text-tertiary: #8e90a4;
-  --text-doc: #2e2f3e;
-  --text-doc-heading: #1c1d26;
-  --accent: #3b6ed5;
-  --accent-dim: rgba(59, 110, 213, 0.07);
-  --accent-hover: #2a5bc0;
-  --accent-text: #3060c0;
+  --border: #cfd8e6;
+  --border-subtle: #e0e7f1;
+  --text-primary: #18202d;
+  --text-secondary: #556277;
+  --text-tertiary: #74839a;
+  --text-doc: #2a3443;
+  --text-doc-heading: #18202d;
+  --accent: #1f6fe5;
+  --accent-dim: rgba(31, 111, 229, 0.12);
+  --accent-hover: #0f5ed2;
+  --accent-text: #185dbe;
   --green: #1a8c4e;
   --orange: #c56a10;
   --red: #c43030;
@@ -292,9 +292,10 @@ a:hover { color: var(--accent-hover); }
 .nav-doc-section.depth-3 { padding-left: 40px; font-size: 0.72rem; }
 
 .nav-section-btn {
-  display: flex;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) minmax(3.1rem, auto) 14px;
   align-items: center;
-  gap: 8px;
+  column-gap: 8px;
   width: 100%;
   padding: 8px 16px;
   background: none;
@@ -309,19 +310,32 @@ a:hover { color: var(--accent-hover); }
 }
 .nav-section-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
 .nav-section-btn.active { color: var(--accent); background: var(--accent-dim); }
-.nav-section-btn svg { flex-shrink: 0; transition: transform var(--transition); }
-.nav-section-btn .chevron { margin-left: auto; }
+.nav-section-btn svg { transition: transform var(--transition); }
+.nav-section-btn > span:not(.nav-section-count):not(.chevron) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nav-section-btn .chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .nav-section-btn.expanded .chevron { transform: rotate(90deg); }
 
 .nav-section-count {
+  justify-self: end;
+  width: 3.1rem;
+  text-align: right;
   font-size: 0.7rem;
-  color: var(--text-tertiary);
-  font-weight: 400;
-  background: var(--bg-tertiary);
-  padding: 1px 6px;
-  border-radius: 10px;
-  margin-left: auto;
-  margin-right: 4px;
+  color: var(--accent-text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  padding: 1px 8px;
+  border-radius: 999px;
 }
 
 .nav-items { display: none; padding: 2px 0; }
@@ -421,6 +435,10 @@ a:hover { color: var(--accent-hover); }
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
+.section-card:hover .section-card-icon {
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg-card));
+  color: var(--accent-hover);
+}
 
 .section-card-icon {
   width: 36px;
@@ -491,7 +509,11 @@ a:hover { color: var(--accent-hover); }
   cursor: pointer;
   transition: all var(--transition);
 }
-.doc-item:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+.doc-item:hover {
+  border-color: color-mix(in srgb, var(--accent) 58%, var(--border));
+  background: var(--bg-card-hover);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent);
+}
 
 .doc-item-title {
   flex: 1;
@@ -508,24 +530,24 @@ a:hover { color: var(--accent-hover); }
 
 .format-badge {
   font-size: 0.65rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   padding: 2px 7px;
   border-radius: 4px;
   letter-spacing: 0.04em;
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
   transition: all var(--transition);
   text-decoration: none;
 }
-.format-badge.html { background: rgba(92, 213, 144, 0.1); color: var(--green); }
-.format-badge.html:hover { background: rgba(92, 213, 144, 0.2); }
-.format-badge.pdf { background: rgba(240, 160, 80, 0.1); color: var(--orange); }
-.format-badge.pdf:hover { background: rgba(240, 160, 80, 0.2); }
-.format-badge.txt { background: rgba(148, 150, 168, 0.1); color: var(--text-secondary); }
-.format-badge.txt:hover { background: rgba(148, 150, 168, 0.2); }
-.format-badge.xhtml { background: rgba(110, 158, 255, 0.1); color: var(--accent); }
-.format-badge.xhtml:hover { background: rgba(110, 158, 255, 0.15); }
+.format-badge.html { background: rgba(92, 213, 144, 0.14); border-color: rgba(92, 213, 144, 0.24); color: var(--green); }
+.format-badge.html:hover { background: rgba(92, 213, 144, 0.24); }
+.format-badge.pdf { background: rgba(240, 160, 80, 0.16); border-color: rgba(240, 160, 80, 0.28); color: var(--orange); }
+.format-badge.pdf:hover { background: rgba(240, 160, 80, 0.26); }
+.format-badge.txt { background: rgba(148, 150, 168, 0.14); border-color: rgba(148, 150, 168, 0.2); color: var(--text-secondary); }
+.format-badge.txt:hover { background: rgba(148, 150, 168, 0.22); }
+.format-badge.xhtml { background: color-mix(in srgb, var(--accent) 18%, transparent); border-color: color-mix(in srgb, var(--accent) 30%, transparent); color: var(--accent-text); }
+.format-badge.xhtml:hover { background: color-mix(in srgb, var(--accent) 28%, transparent); }
 
 /* ===========================================
    DOCUMENT VIEWER
@@ -941,21 +963,23 @@ a:hover { color: var(--accent-hover); }
   gap: 4px;
   padding: 8px 12px;
   border-radius: var(--radius-sm);
+  border: 1px solid transparent;
   cursor: pointer;
   transition: all var(--transition);
 }
 .search-result-item:hover,
 .search-result-item.highlighted {
-  background: var(--bg-hover);
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg-hover));
+  border-color: color-mix(in srgb, var(--accent) 26%, transparent);
 }
 .result-row { display: flex; align-items: center; gap: 10px; width: 100%; }
-.search-result-item .result-icon { color: var(--text-tertiary); flex-shrink: 0; }
+.search-result-item .result-icon { color: var(--accent-text); flex-shrink: 0; }
 .search-result-item .result-title { font-size: 0.85rem; color: var(--text-primary); flex: 1; }
 .search-result-item .result-title mark {
-  background: var(--accent-dim);
-  color: var(--accent);
-  border-radius: 2px;
-  padding: 0 1px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent-text);
+  border-radius: 3px;
+  padding: 0 2px;
 }
 .search-result-item .result-section { font-size: 0.7rem; color: var(--text-tertiary); flex-shrink: 0; }
 
@@ -971,10 +995,10 @@ a:hover { color: var(--accent-hover); }
   line-clamp: 2;
 }
 .result-snippet mark {
-  background: var(--accent-dim);
-  color: var(--accent);
-  border-radius: 2px;
-  padding: 0 1px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent-text);
+  border-radius: 3px;
+  padding: 0 2px;
 }
 
 .search-empty {

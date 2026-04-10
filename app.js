@@ -61,6 +61,36 @@
   let findHighlights = [];
   let findCurrentIdx = -1;
 
+  const APP_DOCS_DATA = normalizeLegacySections(
+    typeof DOCS_DATA !== 'undefined'
+      ? DOCS_DATA
+      : (typeof DOCS_CATALOG !== 'undefined' ? buildLegacySectionsFromCatalog(DOCS_CATALOG) : [])
+  );
+
+  function normalizeLegacySections(sections) {
+    const safeSections = Array.isArray(sections) ? sections : [];
+    return safeSections.map((section, sectionIndex) => ({
+      id: section && section.id ? section.id : `section-${sectionIndex}`,
+      title: section && section.title ? section.title : `Section ${sectionIndex + 1}`,
+      icon: section && section.icon ? section.icon : 'book',
+      description: section && section.description ? section.description : '',
+      items: normalizeLegacyItems(section && section.items, section && section.id ? section.id : `section-${sectionIndex}`),
+    }));
+  }
+
+  function normalizeLegacyItems(items, sectionId) {
+    const safeItems = Array.isArray(items) ? items : [];
+    return safeItems.map((item, itemIndex) => ({
+      id: item && item.id ? item.id : `doc:${sectionId}:${itemIndex}`,
+      title: item && item.title ? item.title : `Untitled ${itemIndex + 1}`,
+      href: item && item.href ? item.href : `generated/${sectionId}/${itemIndex}`,
+      formats: Array.isArray(item && item.formats) && item.formats.length ? item.formats : ['txt'],
+      tags: Array.isArray(item && item.tags) ? item.tags : [],
+      path: item && item.path ? item.path : null,
+      url: item && item.url ? item.url : null,
+    }));
+  }
+
   // ===========================================
   // PIN SYSTEM
   // ===========================================
@@ -155,7 +185,7 @@
         const url = el.dataset.url;
 
         if (sectionId && href) {
-          const section = DOCS_DATA.find(s => s.id === sectionId);
+          const section = APP_DOCS_DATA.find(s => s.id === sectionId);
           const item = section?.items.find(i => i.href === href);
           if (section && item) {
             openDoc(section, item);
@@ -245,7 +275,7 @@
 
   function renderSidebar() {
     let html = '';
-    DOCS_DATA.forEach((section) => {
+    APP_DOCS_DATA.forEach((section) => {
       html += `
         <div class="nav-section" data-section="${section.id}">
           <button class="nav-section-btn" data-section="${section.id}">
@@ -268,7 +298,7 @@
 
     sidebarNav.querySelectorAll('.nav-section-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const section = DOCS_DATA.find(s => s.id === btn.dataset.section);
+        const section = APP_DOCS_DATA.find(s => s.id === btn.dataset.section);
         if (!section) return;
         const itemsEl = document.getElementById('nav-items-' + section.id);
         const isOpen = itemsEl.classList.contains('open');
@@ -281,7 +311,7 @@
 
     sidebarNav.querySelectorAll('.nav-item').forEach(item => {
       item.addEventListener('click', () => {
-        const section = DOCS_DATA.find(s => s.id === item.dataset.section);
+        const section = APP_DOCS_DATA.find(s => s.id === item.dataset.section);
         if (section) { openDoc(section, section.items[parseInt(item.dataset.idx)]); closeMobileSidebar(); }
       });
     });
@@ -385,7 +415,7 @@
   function renderWelcome() {
     let totalDocs = 0;
     let cardsHtml = '';
-    DOCS_DATA.forEach(section => {
+    APP_DOCS_DATA.forEach(section => {
       totalDocs += section.items.length;
       cardsHtml += `
         <div class="section-card" data-section="${section.id}">
@@ -397,12 +427,12 @@
     });
     sectionCards.innerHTML = cardsHtml;
     welcomeStats.innerHTML = `
-      <div class="stat-item"><span class="stat-number">${DOCS_DATA.length}</span> sections</div>
+      <div class="stat-item"><span class="stat-number">${APP_DOCS_DATA.length}</span> sections</div>
       <div class="stat-item"><span class="stat-number">${totalDocs}</span> documents</div>
       <div class="stat-item"><span class="stat-number">1500+</span> pages indexed</div>`;
     sectionCards.querySelectorAll('.section-card').forEach(card => {
       card.addEventListener('click', () => {
-        const section = DOCS_DATA.find(s => s.id === card.dataset.section);
+        const section = APP_DOCS_DATA.find(s => s.id === card.dataset.section);
         if (section) showSection(section);
       });
     });
@@ -787,7 +817,7 @@
 
     const quickResults = [];
     const qLower = q.toLowerCase();
-    for (const section of DOCS_DATA) {
+    for (const section of APP_DOCS_DATA) {
       for (const item of section.items) {
         if (item.title.toLowerCase().includes(qLower) || item.tags.some(t => t.includes(qLower)))
           quickResults.push({ section, item });
@@ -849,7 +879,7 @@
       el.addEventListener('click', () => {
         const { section: sid, href, path, url } = el.dataset;
         if (sid && href) {
-          const section = DOCS_DATA.find(s => s.id === sid);
+          const section = APP_DOCS_DATA.find(s => s.id === sid);
           const item = section?.items.find(i => i.href === href);
           if (section && item) { closeSearch(); openDoc(section, item); closeMobileSidebar(); return; }
         }

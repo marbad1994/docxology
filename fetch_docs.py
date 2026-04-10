@@ -17,6 +17,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 BASE_URL = 'https://www.x.org/releases/current/doc/'
 OUT_DIR = Path(__file__).parent / 'docs'
 INDEX_FILE = Path(__file__).parent / 'search_index.js'
+SEARCH_JSON_FILE = OUT_DIR / 'search_index.json'
+CATALOG_FILE = OUT_DIR / 'catalog.json'
 
 # Rate limiting
 REQUEST_DELAY = 0.1  # seconds between requests
@@ -227,6 +229,68 @@ def normalize_url(base_url, href):
     return base + href
 
 
+def infer_formats_from_path(path):
+    ext = Path(path).suffix.lower().lstrip('.')
+    return [ext] if ext else ['html']
+
+
+def build_catalog_tree(entries):
+    root = {
+        'schema_version': 1,
+        'type': 'catalog',
+        'title': 'Fetched Documentation Catalog',
+        'roots': [],
+    }
+
+    groups = {}
+
+    def get_group(parent_children, group_id, title, path_key):
+        if path_key in groups:
+            return groups[path_key]
+        group = {
+            'type': 'group',
+            'id': group_id,
+            'title': title,
+            'description': '',
+            'children': [],
+        }
+        parent_children.append(group)
+        groups[path_key] = group
+        return group
+
+    for entry in sorted(entries, key=lambda item: item['path']):
+        parts = Path(entry['path']).parts
+        parent_children = root['roots']
+        parent_path = []
+
+        for segment in parts[:-1]:
+            parent_path.append(segment)
+            group_path = '/'.join(parent_path)
+            group = get_group(
+                parent_children,
+                f"group:{group_path.replace('/', ':')}",
+                segment,
+                group_path,
+            )
+            parent_children = group['children']
+
+        parent_children.append({
+            'type': 'document',
+            'id': f"doc:{entry['path'].replace('/', ':')}",
+            'title': entry['title'],
+            'href': entry['path'],
+            'formats': infer_formats_from_path(entry['path']),
+            'tags': [],
+            'path': entry['path'],
+            'url': entry['url'],
+            'meta': {
+                'source_path': entry['path'],
+            },
+        })
+
+    return root
+
+
 def main():
     print("=" * 60)
     print("X.Org Documentation Fetcher")
@@ -352,20 +416,31 @@ def main():
     # Sort by path for consistency
     search_entries.sort(key=lambda x: x['path'])
 
-    # Write the search index as a JS file
+    # Write the search index as a JS file for the current app
     js_content = 'const SEARCH_DOCS = ' + json.dumps(search_entries, ensure_ascii=False) + ';\n'
     INDEX_FILE.write_text(js_content, encoding='utf-8')
+
+    # Also write data-only artifacts for the generalized document browser
+    SEARCH_JSON_FILE.write_text(json.dumps(search_entries, ensure_ascii=False), encoding='utf-8')
+    CATALOG_FILE.write_text(json.dumps(build_catalog_tree(search_entries), indent=2, ensure_ascii=False), encoding='utf-8')
+
     print(f"  Index file: {INDEX_FILE}")
+    print(f"  Search JSON: {SEARCH_JSON_FILE}")
+    print(f"  Catalog file: {CATALOG_FILE}")
     print(f"  Index entries: {len(search_entries)}")
     index_size_mb = INDEX_FILE.stat().st_size / 1024 / 1024
     print(f"  Index size: {index_size_mb:.1f} MB")
 
     # Also write a manifest of all docs
     manifest = {
+        'schema_version': 1,
         'fetched_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
         'base_url': BASE_URL,
         'total_docs': len(search_entries),
         'total_size_bytes': sum(len(d['text'].encode('utf-8')) for d in search_entries),
+        'search_index_js': INDEX_FILE.name,
+        'search_index_json': SEARCH_JSON_FILE.name,
+        'catalog_file': CATALOG_FILE.name,
     }
     manifest_file = OUT_DIR / 'manifest.json'
     manifest_file.write_text(json.dumps(manifest, indent=2), encoding='utf-8')
