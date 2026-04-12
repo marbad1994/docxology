@@ -1,6 +1,11 @@
-# Document Browser Notes
+# Docxology
 
-This app still renders the same `DOCS_DATA -> section.items[]` shape the current UI expects, but it now also defines a recursive `DOCS_CATALOG` model so we can grow beyond two hard-coded levels without breaking the browser.
+This started with me asking claude to create a searchable and formatted documentation viewer for the X.Org documentation since it's very hard to read and a lot of pages. After it was useful to me several times I decided to deploy it for everyone to enjoy. It's deployed here: [Xorg Docxology](https://xorg-documentation.fly.dev)
+
+Then I thought that it was actually a pretty good tool so I asked codex to make it a simple tool for documentation.
+So yes it is vibe coded and yes it is a mess but it works okay for now. It's just the outcome of something I needed in the moment.
+
+The user guide can be found here: [Docxology Documentation](https://github.com/marbad1994/docxology)
 
 ## Current contract
 
@@ -43,14 +48,3 @@ Use a normalized catalog as the long-term source of truth:
   ]
 }
 ```
-
-## Fetch pipeline
-
-`fetch_docs.py` now writes:
-
-- `search_index.js` for the current app
-- `docs.xorg/search_index.json` as data-only search input
-- `docs.xorg/catalog.json` as a recursive catalog grouped by path segments
-- `docs.xorg/manifest.json` with schema metadata
-
-That lets us preserve current output while moving toward a generic document browser that can import many source types and arbitrary nesting depths.
