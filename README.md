@@ -5,7 +5,7 @@ This started with me asking claude to create a searchable and formatted document
 Then I thought that it was actually a pretty good tool so I asked codex to make it a simple tool for documentation.
 So yes it is vibe coded and yes it is a mess but it works okay for now. It's just the outcome of something I needed in the moment.
 
-The user guide can be found here: [Docxology Documentation](https://github.com/marbad1994/docxology)
+The user guide can be found here: [Docxology Documentation](https://marbad1994.github.io/docxology/)
 
 ## Current contract
 
