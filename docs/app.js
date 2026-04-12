@@ -1421,7 +1421,7 @@
     if (mobileTitle) mobileTitle.textContent = title;
     if (welcomeTitle) welcomeTitle.textContent = title;
     if (welcomeSubtitle) welcomeSubtitle.innerHTML = escapeHtml(description);
-    if (welcomeHint) welcomeHint.innerHTML = 'The released X.Org corpus is archived in <code>docs.xorg/</code> and stays separate from the active documentation workspace.';
+    if (welcomeHint) welcomeHint.innerHTML = '';
     sectionCards.innerHTML = APP_DOCS_DATA.map(section => `
       <article class="section-card" data-section="${section.id}">
         <div class="section-card-icon">${ICONS[section.icon] || ICONS.book}</div>

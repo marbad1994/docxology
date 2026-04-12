@@ -16,6 +16,10 @@ That structure keeps the UI simple while still giving you enough depth to docume
 
 This project began as a way to make difficult reference material easier to search and browse. The original use case was the X.Org documentation set, which is now archived separately and no longer treated as the active product content.
 
+The X.Org documentation is deployed here: 
+
+[Xorg Docxology](https://xorg-documentation.fly.dev)
+
 ## What makes it useful
 
 - Import common text-based formats into one editable model
