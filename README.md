@@ -1,6 +1,6 @@
 # Docxology
 
-This started with me asking claude to create a searchable and formatted documentation viewer for the X.Org documentation since it's very hard to read and a lot of pages. After it was useful to me several times I decided to deploy it for everyone to enjoy. It's deployed here: [Xorg Docxology](https://xorg-documentation.fly.dev)
+This started with me asking claude to create a searchable and formatted documentation viewer for the X.Org documentation since it's very hard to read and a lot of pages. After it was useful to me several times I decided to deploy it for everyone to enjoy. It's deployed here: [Xorg Docxology](https://xorg-documentation.fly.dev) or test it with the AI chat helper [Xorg Docxology with AI widget](http://149.248.196.196/)
 
 Then I thought that it was actually a pretty good tool so I asked codex to make it a simple tool for documentation.
 So yes it is vibe coded and yes it is a mess but it works okay for now. It's just the outcome of something I needed in the moment.
